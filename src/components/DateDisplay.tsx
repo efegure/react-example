@@ -1,6 +1,6 @@
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
-
+import { Button } from 'antd'
 const DateDisplay: React.FC = () => {
     const [date, setDate] = useState('')
 
@@ -17,6 +17,7 @@ const DateDisplay: React.FC = () => {
     return (
         <div style={{ position: 'relative', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
             <span style={{ color: 'orange' }}>{date}</span>
+            <Button>Button</Button>
         </div>
     )
 }

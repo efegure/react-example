@@ -7,11 +7,13 @@
         "url": "https://github.com/efegure"
     },
     "dependencies": {
+        "@ant-design/v5-patch-for-react-19": "^1.0.3",
         "@reduxjs/toolkit": "^2.5.0",
         "@tailwindcss/vite": "^4.1.7",
         "@testing-library/jest-dom": "^6.6.3",
         "@testing-library/react": "^16.1.0",
         "@testing-library/user-event": "^14.5.2",
+        "antd": "^5.25.2",
         "axios": "^1.7.9",
         "eslint-plugin-prettier": "^5.2.1",
         "moment": "^2.30.1",
