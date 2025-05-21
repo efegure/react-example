@@ -8,6 +8,7 @@
     },
     "dependencies": {
         "@ant-design/v5-patch-for-react-19": "^1.0.3",
+        "@faker-js/faker": "^9.8.0",
         "@reduxjs/toolkit": "^2.5.0",
         "@tailwindcss/vite": "^4.1.7",
         "@testing-library/jest-dom": "^6.6.3",
@@ -34,7 +35,7 @@
         "test": "jest",
         "test:coverage": "jest --silent --watchAll=false --coverage",
         "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-        "format": "prettier --check ."
+        "format": "prettier --write ."
     },
     "eslintConfig": {
         "extends": "react-app"
@@ -58,6 +59,7 @@
         "identity-obj-proxy": "^3.0.0",
         "jest": "^29.7.0",
         "jest-environment-jsdom": "^29.7.0",
+        "msw": "2.7.5",
         "prettier": "^3.4.2",
         "ts-jest": "^29.2.5",
         "typescript": "^5.7.2",
@@ -67,5 +69,11 @@
         "vitest": "^2.1.8"
     },
     "homepage": ".",
-    "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+    "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
+    "msw": {
+        "workerDirectory": [
+            "src",
+            "public"
+        ]
+    }
 }

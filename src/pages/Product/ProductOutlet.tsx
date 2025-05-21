@@ -6,9 +6,9 @@ const ProductOutlet: React.FC = () => {
     return (
         <Routes>
             <Route path="/" element={<ProductPage />} />
-            <Route path="/detail" element={<ProductDetailPage />} />
+            <Route path="/detail/:id" element={<ProductDetailPage />} />
             <Route path="/add" element={<AddProductPage />} />
-            <Route path="/edit" element={<EditProductPage />} />
+            <Route path="/edit/:id" element={<EditProductPage />} />
         </Routes>
     )
 }

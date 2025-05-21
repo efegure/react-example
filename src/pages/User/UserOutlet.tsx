@@ -7,7 +7,7 @@ const UserOutlet: React.FC = () => {
         <Routes>
             <Route path="/" element={<UsersPage />} />
             <Route path="/add" element={<AddUserPage />} />
-            <Route path="/edit" element={<EditUserPage />} />
+            <Route path="/edit/:id" element={<EditUserPage />} />
         </Routes>
     )
 }

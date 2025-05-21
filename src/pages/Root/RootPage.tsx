@@ -9,12 +9,7 @@ import '../../styles/main.sass'
 const { Header, Content, Footer, Sider } = Layout
 
 function getItem(label: React.ReactNode, key: React.Key, icon?: React.ReactNode, children?: MenuItem[]): MenuItem {
-    return {
-        key,
-        icon,
-        children,
-        label
-    } as MenuItem
+    return { key, icon, children, label } as MenuItem
 }
 
 const items: MenuItem[] = [
@@ -32,7 +27,7 @@ const RootPage: React.FC = () => {
     } = theme.useToken()
     const navigate = useNavigate()
     const handleMenuItemClick = (menuItem: MenuItem) => {
-        navigate(menuItem?.key)
+        navigate(menuItem?.key as string)
         console.log(menuItem)
     }
 
@@ -48,7 +43,7 @@ const RootPage: React.FC = () => {
                     {/* <Breadcrumb style={{ margin: '16px 0' }} items={[{ title: 'User' }, { title: 'Bill' }]} /> */}
                     <Outlet />
                 </Content>
-                <Footer style={{ textAlign: 'center' }}>Ant Design ©{new Date().getFullYear()} Created by Ant UED</Footer>
+                {/* <Footer style={{ textAlign: 'center' }}>Ant Design ©{new Date().getFullYear()} Created by Ant UED</Footer> */}
             </Layout>
         </Layout>
     )

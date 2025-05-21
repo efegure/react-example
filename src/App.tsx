@@ -1,11 +1,11 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
-import { persistor, store } from './store/reducers/store'
 import { ConfigProvider, theme } from 'antd'
 import { BrowserRouter as Router, Route, Routes } from 'react-router'
 import RootPage from './pages/Root/RootPage'
 import '@ant-design/v5-patch-for-react-19' // ? ant design fix for react v19
+import { persistor, store } from './store/store'
 // import './styles/global.css'
 
 const App: React.FC = () => {
