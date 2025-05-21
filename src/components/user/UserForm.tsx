@@ -16,7 +16,7 @@ interface UserProps {
 }
 const UserForm: React.FC<UserProps> = ({ user }) => {
     const dispatch = useDispatch<AppDispatch>()
-    const loadingAdd = useSelector((state: RootState) => state.product.loadingAdd)
+    const loadingAdd = useSelector((state: RootState) => state.user.loadingAdd)
     const navigate = useNavigate()
 
     const [form] = Form.useForm()
@@ -49,7 +49,7 @@ const UserForm: React.FC<UserProps> = ({ user }) => {
             </Form.Item>
             <Form.Item {...tailLayout}>
                 <Space>
-                    <Button type="primary" htmlType="submit">
+                    <Button loading={loadingAdd} type="primary" htmlType="submit">
                         Submit
                     </Button>
                     {/* <Button htmlType="button" onClick={onReset}>

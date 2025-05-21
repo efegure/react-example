@@ -2,15 +2,31 @@ import { faker } from '@faker-js/faker'
 import { delay, http, HttpResponse } from 'msw'
 import { Product, User } from '~/types/domain'
 
+// ? MOCK DATA
+const CATEGORIES = ['Electronics', 'Books', 'Clothing', 'Home', 'Toys']
+let favorites: Array<string> = []
+const products = Array.from({ length: 10 }).map(() => ({
+    id: faker.string.uuid(),
+    name: faker.commerce.productName(),
+    description: faker.commerce.productDescription(),
+    category: faker.helpers.arrayElement(CATEGORIES),
+    price: faker.finance.amount,
+    currency: faker.finance.currencySymbol,
+    image: faker.image.urlPicsumPhotos()
+}))
+const users = Array.from({ length: 5 }).map(() => ({
+    id: faker.string.uuid(),
+    firstName: faker.person.firstName(),
+    lastName: faker.person.lastName(),
+    email: faker.internet.email(),
+    gender: faker.person.gender(),
+    avatar: faker.image.avatar()
+}))
+
+// ? MOCK DATA
+
 export const productHandlers = [
     http.get('/api/product', async () => {
-        const products = Array.from({ length: 5 }).map(() => ({
-            id: faker.string.uuid(),
-            name: faker.commerce.productName(),
-            description: faker.commerce.productDescription(),
-            category: faker.commerce.department()
-        }))
-
         await delay(1000)
         return HttpResponse.json(products)
     }),
@@ -28,19 +44,33 @@ export const productHandlers = [
     http.delete('/api/product/:id', async ({ params }) => {
         await delay(1000)
         return HttpResponse.json({ id: params.id }, { status: 200 })
+    }),
+    http.get('/api/product/favorite/:id', async ({ params }) => {
+        const id = params.id as string
+        if (favorites.includes(id)) {
+            favorites = favorites.filter((e) => e !== id)
+        } else {
+            favorites.push(id)
+        }
+        await delay(1000)
+        return HttpResponse.json(favorites, { status: 200 })
+    }),
+    http.get('/api/product/search', async ({ request }) => {
+        const url = new URL(request.url)
+        const query = decodeURI(url.searchParams.get('query') ?? '')
+        const category = decodeURI(url.searchParams.get('category') ?? '')
+        await delay(1000)
+        return HttpResponse.json(
+            products
+                .filter((p) => p.name.toLocaleLowerCase().includes(query) || p.description.toLocaleLowerCase().includes(query))
+                .filter((p) => (category ? p.category === category : true)),
+            { status: 200 }
+        )
     })
 ]
 
 export const userHandlers = [
     http.get('/api/user', async () => {
-        const users = Array.from({ length: 5 }).map(() => ({
-            id: faker.string.uuid(),
-            firstName: faker.person.firstName(),
-            lastName: faker.person.lastName(),
-            email: faker.internet.email(),
-            gender: faker.person.gender(),
-            avatar: faker.image.avatar()
-        }))
         await delay(1000)
         return HttpResponse.json(users)
     }),

@@ -1,56 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import { Avatar, Button, List, Modal, Skeleton } from 'antd'
-import { deleteProduct, getProducts } from '~/features/productSlice'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from '~/store/store'
+import React from 'react'
+import { Button, List, Skeleton, Tooltip } from 'antd'
+import { StarFilled, StarOutlined } from '@ant-design/icons'
 import { Link } from 'react-router'
 import { Product } from '~/types/domain'
+interface IProductListProps {
+    products: Product[]
+    loading: boolean
+    loadingDelete: boolean
+    loadingFavorite: boolean
+    favorites: string[]
+    onLoadMore: () => void
+    onDelete: (product: Product) => void
+    onToggleFavorite: (id: string) => void
+}
 
-const ProductList: React.FC = () => {
-    const [page, setPage] = useState(1)
-
-    const dispatch = useDispatch<AppDispatch>()
-    const products = useSelector((state: RootState) => state.product.data)
-    const loading = useSelector((state: RootState) => state.product.loading)
-
-    useEffect(() => {
-        if (products.length === 0) {
-            dispatch(getProducts())
-        }
-    }, [dispatch])
-
-    const onLoadMore = () => {
-        const nextPage = page + 1
-        setPage(nextPage)
-        dispatch(getProducts()).then(() => {
-            window.dispatchEvent(new Event('resize'))
-        })
-    }
-
-    //modal
-    const [open, setOpen] = useState(false)
-    const [modalText, setModalText] = useState('Content of the modal')
-    const [selectedProd, setselectedProd] = useState('')
-    const loadingDelete = useSelector((state: RootState) => state.product.loadingDelete)
-
-    const openDeleteDialog = (prod: Product) => {
-        setOpen(true)
-        setselectedProd(prod.id)
-        setModalText('Are you sure you want to delete ' + prod.name + ' ?')
-    }
-    const handleOk = () => {
-        setModalText('Deleting...')
-        dispatch(deleteProduct(selectedProd)).then(() => {
-            setselectedProd('')
-            setOpen(false)
-        })
-    }
-    const handleCancel = () => {
-        console.log('Clicked cancel button')
-        setOpen(false)
-    }
-    //modal
-
+const ProductList: React.FC<IProductListProps> = ({ products, favorites, loading, loadingFavorite, loadingDelete, onLoadMore, onDelete, onToggleFavorite }) => {
     const loadMore = !loading ? (
         <div style={{ textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px' }}>
             <Button onClick={onLoadMore}>loading more</Button>
@@ -72,7 +36,15 @@ const ProductList: React.FC = () => {
                             <Link to={'/products/edit/' + item.id} key="list-loadmore-edit">
                                 edit
                             </Link>,
-                            <Button onClick={() => openDeleteDialog(item)} key="list-loadmore-more">
+                            <Tooltip placement="topLeft" title="Favorite">
+                                <Button
+                                    loading={loadingFavorite}
+                                    icon={favorites.includes(item.id) ? <StarFilled /> : <StarOutlined />}
+                                    onClick={() => onToggleFavorite(item.id)}
+                                    key="favorite"
+                                />
+                            </Tooltip>,
+                            <Button onClick={() => onDelete(item)} key="list-loadmore-more">
                                 delete
                             </Button>
                         ]}
@@ -84,9 +56,6 @@ const ProductList: React.FC = () => {
                     </List.Item>
                 )}
             />
-            <Modal title="Title" open={open} onOk={handleOk} confirmLoading={loadingDelete} onCancel={handleCancel}>
-                <p>{modalText}</p>
-            </Modal>
         </>
     )
 }
