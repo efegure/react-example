@@ -1,37 +1,30 @@
 import React from 'react'
 import { Button, Form, Input, Select, Space } from 'antd'
 import { Product } from '~/types/domain'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from '~/store/store'
-import { addProduct, editProduct } from '~/features/productSlice'
-import { useNavigate } from 'react-router'
 
 const layout = { labelCol: { span: 8 }, wrapperCol: { span: 16 } }
 
 const tailLayout = { wrapperCol: { offset: 8, span: 16 } }
+interface ProductFormValues {
+    name: string
+    description: string
+    category: string
+    price: number
+}
 interface ProductProps {
     product?: Product
+    onSubmit: (values: ProductFormValues) => void
+    loading: boolean
 }
-const ProductForm: React.FC<ProductProps> = ({ product }) => {
-    const dispatch = useDispatch<AppDispatch>()
-    const loadingAdd = useSelector((state: RootState) => state.product.loadingAdd)
-    const navigate = useNavigate()
-
+const ProductForm: React.FC<ProductProps> = ({ product, onSubmit, loading }) => {
     const [form] = Form.useForm()
+
     if (product && product.id) {
         form.setFieldsValue(product)
     }
 
-    const onFinish = ({ category, description, name }: { category: string; description: string; name: string }) => {
-        if (product && product.id) {
-            dispatch(editProduct({ id: product.id, category, description, name })).then(() => {
-                navigate('/products')
-            })
-        } else {
-            dispatch(addProduct({ category, description, name })).then(() => {
-                navigate('/products')
-            })
-        }
+    const onFinish = ({ category, description, name, price }: { category: string; description: string; name: string; price: number }) => {
+        onSubmit({ category, description, name, price })
     }
 
     return (
@@ -45,9 +38,12 @@ const ProductForm: React.FC<ProductProps> = ({ product }) => {
             <Form.Item name="category" label="Category" rules={[{ required: true }]}>
                 <Input />
             </Form.Item>
+            <Form.Item name="price" label="Price" rules={[{ required: true }]}>
+                <Input type="number" />
+            </Form.Item>
             <Form.Item {...tailLayout}>
                 <Space>
-                    <Button loading={loadingAdd} type="primary" htmlType="submit">
+                    <Button loading={loading} type="primary" htmlType="submit">
                         Submit
                     </Button>
                 </Space>

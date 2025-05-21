@@ -1,20 +1,19 @@
 import React from 'react'
 import { Button, List, Skeleton, Tooltip } from 'antd'
-import { StarFilled, StarOutlined } from '@ant-design/icons'
 import { Link } from 'react-router'
 import { Product } from '~/types/domain'
+import { StarFilled, StarOutlined } from '@ant-design/icons'
+
 interface IProductListProps {
     products: Product[]
     loading: boolean
-    loadingDelete: boolean
-    loadingFavorite: boolean
     favorites: string[]
+    onGoToDetail: (id: string) => void
     onLoadMore: () => void
     onDelete: (product: Product) => void
-    onToggleFavorite: (id: string) => void
 }
 
-const ProductList: React.FC<IProductListProps> = ({ products, favorites, loading, loadingFavorite, loadingDelete, onLoadMore, onDelete, onToggleFavorite }) => {
+const ProductList: React.FC<IProductListProps> = ({ products, loading, favorites, onGoToDetail, onLoadMore, onDelete }) => {
     const loadMore = !loading ? (
         <div style={{ textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px' }}>
             <Button onClick={onLoadMore}>loading more</Button>
@@ -36,22 +35,26 @@ const ProductList: React.FC<IProductListProps> = ({ products, favorites, loading
                             <Link to={'/products/edit/' + item.id} key="list-loadmore-edit">
                                 edit
                             </Link>,
-                            <Tooltip placement="topLeft" title="Favorite">
-                                <Button
-                                    loading={loadingFavorite}
-                                    icon={favorites.includes(item.id) ? <StarFilled /> : <StarOutlined />}
-                                    onClick={() => onToggleFavorite(item.id)}
-                                    key="favorite"
-                                />
-                            </Tooltip>,
+                            favorites.includes(item.id) ? <StarFilled /> : <StarOutlined />,
                             <Button onClick={() => onDelete(item)} key="list-loadmore-more">
                                 delete
                             </Button>
                         ]}
                     >
                         <Skeleton avatar title={false} loading={loading} active>
-                            <List.Item.Meta title={<span>{item.name}</span>} description={item.description} />
-                            <div>{item.category}</div>
+                            <List.Item.Meta
+                                title={
+                                    <span style={{ cursor: 'pointer' }} onClick={() => onGoToDetail(item.id)}>
+                                        {item.name}
+                                    </span>
+                                }
+                                description={
+                                    <span style={{ cursor: 'pointer' }} onClick={() => onGoToDetail(item.id)}>
+                                        item.description
+                                    </span>
+                                }
+                            />
+                            <div onClick={() => onGoToDetail(item.id)}>{item.category}</div>
                         </Skeleton>
                     </List.Item>
                 )}

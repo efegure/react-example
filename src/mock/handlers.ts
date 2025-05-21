@@ -10,9 +10,7 @@ const products = Array.from({ length: 10 }).map(() => ({
     name: faker.commerce.productName(),
     description: faker.commerce.productDescription(),
     category: faker.helpers.arrayElement(CATEGORIES),
-    price: faker.finance.amount,
-    currency: faker.finance.currencySymbol,
-    image: faker.image.urlPicsumPhotos()
+    price: faker.finance.amount()
 }))
 const users = Array.from({ length: 5 }).map(() => ({
     id: faker.string.uuid(),
