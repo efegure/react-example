@@ -16,6 +16,7 @@ const UserDetailPage: React.FC = () => {
                 <div
                     style={{
                         marginTop: '20px',
+                        marginBottom: '40px',
                         position: 'relative',
                         width: '100%',
                         display: 'flex',

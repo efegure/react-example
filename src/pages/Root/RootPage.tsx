@@ -16,8 +16,6 @@ const items: MenuItem[] = [
     getItem('Home', '/', <HomeOutlined />),
     getItem('Product', 'products', <ProductOutlined />, [getItem('All Products', '/products'), getItem('Add New Product', '/products/add')]),
     getItem('User', 'users', <TeamOutlined />, [getItem('All Users', '/users'), getItem('Add New User', '/users/add')])
-    // getItem('User', 'sub1', <UserOutlined />, [getItem('Tom', '3'), getItem('Bill', '4'), getItem('Alex', '5')]),
-    // getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
 ]
 
 const RootPage: React.FC = () => {
@@ -33,14 +31,13 @@ const RootPage: React.FC = () => {
 
     return (
         <Layout style={{ minHeight: '100vh' }}>
-            <Sider breakpoint="md" collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+            <Sider breakpoint="md" collapsedWidth="45" collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
                 <div className="demo-logo-vertical" />
                 <Menu theme="dark" defaultSelectedKeys={['/']} mode="inline" items={items} onClick={handleMenuItemClick} />
             </Sider>
             <Layout>
                 <Header style={{ padding: 0, background: colorBgContainer }} />
                 <Content style={{ margin: '0 16px' }}>
-                    {/* <Breadcrumb style={{ margin: '16px 0' }} items={[{ title: 'User' }, { title: 'Bill' }]} /> */}
                     <Outlet />
                 </Content>
                 {/* <Footer style={{ textAlign: 'center' }}>Ant Design ©{new Date().getFullYear()} Created by Ant UED</Footer> */}
