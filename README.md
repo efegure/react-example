@@ -31,6 +31,8 @@ yarn dev
 - [Axios](https://axios-http.com/)
 - [Moment](https://momentjs.com/)
 - [ESlint](https://eslint.org/) & [Prettier](https://prettier.io/)
+- [MSW](https://mswjs.io/)
+- [Faker.js](https://fakerjs.dev/)
 
 ---
 
@@ -131,36 +133,84 @@ Checks if your files are formatted. This command will output a human-friendly me
 This is the structure of the files in the project:
 
 ```sh
-    │
-    ├── public                  # public files (favicon, .htaccess, manifest, ...)
-    ├── src                     # source files
-    │   ├── __tests__           # all test files
-    │   ├── components
-    │   ├── pages
-    │   ├── resources           # images, constants and other static resources
-    │   ├── store               # Redux store
-    │   │   ├── actions         # store's actions
-    │   │   └── reducers        # store's reducers
-    │   ├── styles
-    │   ├── types               # data interfaces
-    │   ├── utility             # utilities functions and custom components
-    │   ├── App.tsx
-    │   ├── index.tsx
-    │   ├── RootComponent.tsx   # React component with all the routes
-    │   ├── serviceWorker.ts
-    │   ├── setupTests.ts
-    │   └── vite-env.d.ts
-    ├── .env
-    ├── .eslintignore
-    ├── .eslintrc.js
-    ├── .gitignore
-    ├── .prettierrc
+Directory structure:
+└── efegure-react-example/
+    ├── README.md
     ├── index.html
     ├── jest.config.cjs
     ├── package.json
-    ├── README.md
     ├── tsconfig.json
-    └── vite.config.json
+    ├── vite.config.ts
+    ├── .eslintignore
+    ├── .eslintrc.cjs
+    ├── .prettierrc
+    ├── public/
+    │   ├── manifest.json
+    │   ├── mockServiceWorker.js
+    │   ├── robots.txt
+    │   └── .htaccess
+    └── src/
+        ├── App.tsx
+        ├── index.tsx
+        ├── setupTests.ts
+        ├── vite-env.d.ts
+        ├── __tests__/
+        │   └── pages/
+        │       ├── HomePage.test.tsx
+        │       └── NotFoundPage.test.tsx
+        ├── components/
+        │   ├── product/
+        │   │   ├── ProductForm.tsx
+        │   │   └── ProductList.tsx
+        │   └── user/
+        │       ├── UserForm.tsx
+        │       └── UserList.tsx
+        ├── features/
+        │   ├── productSlice.ts
+        │   └── userSlice.ts
+        ├── lib/
+        │   ├── customAxios.ts
+        │   ├── product-api.ts
+        │   └── user-api.ts
+        ├── mock/
+        │   ├── browser.ts
+        │   └── handlers.ts
+        ├── pages/
+        │   ├── NotFoundPage.tsx
+        │   ├── Product/
+        │   │   ├── AddProductPage.tsx
+        │   │   ├── EditProductPage.tsx
+        │   │   ├── index.ts
+        │   │   ├── ProductDetailPage.tsx
+        │   │   ├── ProductOutlet.tsx
+        │   │   └── ProductPage.tsx
+        │   ├── Root/
+        │   │   ├── HomePage.tsx
+        │   │   ├── Outlet.tsx
+        │   │   └── RootPage.tsx
+        │   └── User/
+        │       ├── AddUserPage.tsx
+        │       ├── EditUserPage.tsx
+        │       ├── index.ts
+        │       ├── UserDetailPage.tsx
+        │       ├── UserOutlet.tsx
+        │       └── UsersPage.tsx
+        ├── resources/
+        │   ├── api-constants.ts
+        │   └── routes-constants.ts
+        ├── store/
+        │   └── store.ts
+        ├── styles/
+        │   ├── _mixins.sass
+        │   ├── _variables.sass
+        │   ├── global.css
+        │   └── main.sass
+        ├── types/
+        │   ├── common.ts
+        │   ├── domain.ts
+        │   └── reducers.ts
+        └── utility/
+            └── functions.ts
 ```
 
 <p align="center">Bootstrapped with Vite.</p>
