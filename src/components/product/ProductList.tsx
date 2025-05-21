@@ -14,12 +14,6 @@ interface IProductListProps {
 }
 
 const ProductList: React.FC<IProductListProps> = ({ products, loading, favorites, onGoToDetail, onLoadMore, onDelete }) => {
-    const loadMore = !loading ? (
-        <div style={{ textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px' }}>
-            <Button onClick={onLoadMore}>loading more</Button>
-        </div>
-    ) : null
-
     return (
         <>
             <List
@@ -27,7 +21,6 @@ const ProductList: React.FC<IProductListProps> = ({ products, loading, favorites
                 className="demo-loadmore-list"
                 loading={loading}
                 itemLayout="horizontal"
-                loadMore={loadMore}
                 dataSource={products}
                 renderItem={(item) => (
                     <List.Item
@@ -50,7 +43,7 @@ const ProductList: React.FC<IProductListProps> = ({ products, loading, favorites
                                 }
                                 description={
                                     <span style={{ cursor: 'pointer' }} onClick={() => onGoToDetail(item.id)}>
-                                        item.description
+                                        {item.description}
                                     </span>
                                 }
                             />

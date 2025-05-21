@@ -1,39 +1,29 @@
 import React from 'react'
 import { Button, Form, Input, Select, Space } from 'antd'
 import { User } from '~/types/domain'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router'
-import { AppDispatch, RootState } from '~/store/store'
-import { addUser, editUser } from '~/features/userSlice'
-
-const { Option } = Select
 
 const layout = { labelCol: { span: 8 }, wrapperCol: { span: 16 } }
 
 const tailLayout = { wrapperCol: { offset: 8, span: 16 } }
+interface UserFormValues {
+    firstName: string
+    lastName: string
+    email: string
+}
 interface UserProps {
     user?: User
+    onSubmit: (values: UserFormValues) => void
+    loading: boolean
 }
-const UserForm: React.FC<UserProps> = ({ user }) => {
-    const dispatch = useDispatch<AppDispatch>()
-    const loadingAdd = useSelector((state: RootState) => state.user.loadingAdd)
-    const navigate = useNavigate()
 
+const UserForm: React.FC<UserProps> = ({ user, loading, onSubmit }) => {
     const [form] = Form.useForm()
     if (user && user.id) {
         form.setFieldsValue(user)
     }
 
     const onFinish = ({ firstName, lastName, email }: { firstName: string; lastName: string; email: string }) => {
-        if (user && user.id) {
-            dispatch(editUser({ id: user.id, firstName, lastName, email, avatar: user.avatar })).then(() => {
-                navigate('/users')
-            })
-        } else {
-            dispatch(addUser({ firstName, lastName, email })).then(() => {
-                navigate('/users')
-            })
-        }
+        onSubmit({ firstName, lastName, email })
     }
 
     return (
@@ -49,7 +39,7 @@ const UserForm: React.FC<UserProps> = ({ user }) => {
             </Form.Item>
             <Form.Item {...tailLayout}>
                 <Space>
-                    <Button loading={loadingAdd} type="primary" htmlType="submit">
+                    <Button loading={loading} type="primary" htmlType="submit">
                         Submit
                     </Button>
                     {/* <Button htmlType="button" onClick={onReset}>

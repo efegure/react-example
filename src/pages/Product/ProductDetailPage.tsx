@@ -29,7 +29,27 @@ const ProductDetailPage: React.FC = () => {
                         gap: '50px'
                     }}
                 >
-                    <Button onClick={() => navigate('/products')} style={{ alignSelf: 'flex-start' }} icon={<ArrowLeftOutlined />}></Button>
+                    <div
+                        style={{
+                            marginTop: '20px',
+                            position: 'relative',
+                            width: '100%',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            flexDirection: 'row',
+                            gap: '50px'
+                        }}
+                    >
+                        <Button
+                            onClick={() => navigate('/products')}
+                            style={{ alignSelf: 'center', position: 'absolute', left: 0 }}
+                            icon={<ArrowLeftOutlined />}
+                        ></Button>
+
+                        <h1> Product Detail</h1>
+                    </div>
+
                     <Card
                         title={selectedProd?.name}
                         extra={
@@ -44,8 +64,15 @@ const ProductDetailPage: React.FC = () => {
                         }
                         style={{ width: 300 }}
                     >
+                        <p>
+                            <b>Category:</b> {selectedProd?.category}
+                        </p>
+                        <b>Description:</b>
+
                         <p>{selectedProd?.description}</p>
-                        <p>{selectedProd?.price}</p>
+                        <p>
+                            <b>Price:</b> {selectedProd?.price}
+                        </p>
                     </Card>
                 </div>
             ) : (

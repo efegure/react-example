@@ -11,7 +11,7 @@ const AddProductPage: React.FC = () => {
     const loading = useSelector((state: RootState) => state.product.loadingAdd)
 
     const handleAdd = ({ category, description, name, price }: { category: string; description: string; name: string; price: number }) =>
-        dispatch(addProduct({ category, description, name })).then(() => {
+        dispatch(addProduct({ category, description, name, price })).then(() => {
             navigate('/products')
         })
     return (

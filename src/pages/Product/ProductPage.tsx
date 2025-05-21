@@ -28,7 +28,9 @@ const ProductPage: React.FC = () => {
     const [selectedProd, setselectedProd] = useState('')
 
     useEffect(() => {
-        dispatch(getProducts())
+        if (products?.length === 0) {
+            dispatch(getProducts())
+        }
     }, [dispatch])
 
     const handleDelete = (prod: Product) => {
