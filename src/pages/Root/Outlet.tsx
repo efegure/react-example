@@ -6,14 +6,14 @@ import UserOutlet from '../User/UserOutlet'
 import HomePage from './HomePage'
 
 const Outlet: React.FC = () => {
-    return (
-        <Routes>
-            <Route path="*" element={<NotFoundPage />} />
-            <Route path="/" element={<HomePage />} />
-            <Route path="/products/*" element={<ProductOutlet />} />
-            <Route path="/users/*" element={<UserOutlet />} />
-        </Routes>
-    )
+  return (
+    <Routes>
+      <Route path="*" element={<NotFoundPage />} />
+      <Route path="/" element={<HomePage />} />
+      <Route path="/products/*" element={<ProductOutlet />} />
+      <Route path="/users/*" element={<UserOutlet />} />
+    </Routes>
+  )
 }
 
 export default Outlet

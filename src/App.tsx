@@ -9,35 +9,35 @@ import { persistor, store } from './store/store'
 // import './styles/global.css'
 
 const App: React.FC = () => {
-    return (
-        <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-                <ConfigProvider
-                    theme={{
-                        // token: {
-                        //     // Seed Token
-                        //     colorPrimary: '#00b96b',
-                        //     borderRadius: 2,
+  return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <ConfigProvider
+          theme={{
+            // token: {
+            //     // Seed Token
+            //     colorPrimary: '#00b96b',
+            //     borderRadius: 2,
 
-                        //     // Alias Token
-                        //     colorBgContainer: '#f6ffed'
-                        // },
-                        // 1. Use dark algorithm
-                        algorithm: theme.darkAlgorithm
+            //     // Alias Token
+            //     colorBgContainer: '#f6ffed'
+            // },
+            // 1. Use dark algorithm
+            algorithm: theme.darkAlgorithm
 
-                        // 2. Combine dark algorithm and compact algorithm
-                        // algorithm: [theme.darkAlgorithm, theme.compactAlgorithm],
-                    }}
-                >
-                    <Router>
-                        <Routes>
-                            <Route path="/*" element={<RootPage />} />
-                        </Routes>
-                    </Router>
-                </ConfigProvider>
-            </PersistGate>
-        </Provider>
-    )
+            // 2. Combine dark algorithm and compact algorithm
+            // algorithm: [theme.darkAlgorithm, theme.compactAlgorithm],
+          }}
+        >
+          <Router>
+            <Routes>
+              <Route path="/*" element={<RootPage />} />
+            </Routes>
+          </Router>
+        </ConfigProvider>
+      </PersistGate>
+    </Provider>
+  )
 }
 
 export default App
