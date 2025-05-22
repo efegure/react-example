@@ -31,6 +31,7 @@ yarn dev
 
 - [TypeScript](https://www.typescriptlang.org/)
 - [Sass](https://sass-lang.com/)
+- [Ant Design](https://ant.design/)
 - [Redux Toolkit](https://redux-toolkit.js.org/)
 - [Router](https://reactrouter.com/)
 - [Axios](https://axios-http.com/)
