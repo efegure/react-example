@@ -1,7 +1,10 @@
 <h1 align="center">Example React App</h1>
+
 ## Description
-A basic react application that you can do crud operations to mock products and users. 
+
+A basic react application that you can do crud operations to mock products and users.
 Api calls are mocked and can be seen in the network tab thanks to msw library.
+
 ## npm
 
 ```sh
