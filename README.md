@@ -1,5 +1,7 @@
-<h1 align="center">New React App</h1>
-
+<h1 align="center">Example React App</h1>
+## Description
+A basic react application that you can do crud operations to mock products and users. 
+Api calls are mocked and can be seen in the network tab thanks to msw library.
 ## npm
 
 ```sh
@@ -58,24 +60,6 @@ yarn start
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-<br />
-
-## 🧪 test
-
-```
-npm test
-```
-
-or
-
-```
-yarn test
-```
-
-Launches the test runner in the interactive watch mode.
-
-<br />
 
 ## 🦾 build
 
