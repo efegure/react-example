@@ -1,3 +1,7 @@
+## Important Notice
+Recommended node version v22.14
+Has msw library, please use yarn dev command to run the project otherwise you will not see any data.(since there is no production api available)
+
 <h1 align="center">Example React App</h1>
 
 ## Description
